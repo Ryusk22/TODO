@@ -48,3 +48,5 @@ gem 'devise'
 gem 'pry-byebug'
 gem 'rb-readline'
 gem 'faker'
+gem 'annotate'
+
