@@ -1,15 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Typography from '@material-ui/core/Typography';
+import {  makeStyles,
+          ExpansionPanel,
+          ExpansionPanelSummary,
+          ExpansionPanelDetails,
+          ExpansionPanelActions,
+          Checkbox,
+          FormControlLabel,
+          Typography,
+          Button  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 

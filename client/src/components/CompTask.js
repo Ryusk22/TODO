@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
+import {  makeStyles,
+          ExpansionPanel,
+          ExpansionPanelSummary,
+          ExpansionPanelDetails,
+          Typography,
+          ExpansionPanelActions,
+          Button  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Button from '@material-ui/core/Button';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import DeleteIcon from '@material-ui/icons/Delete';
 

@@ -1,10 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { makeStyles, BottomNavigation, BottomNavigationAction, Badge } from '@material-ui/core';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
-import Badge from '@material-ui/core/Badge';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
