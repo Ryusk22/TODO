@@ -1,6 +1,5 @@
 import React from 'react';
-import {  makeStyles,
-          ExpansionPanel,
+import {  ExpansionPanel,
           ExpansionPanelSummary,
           ExpansionPanelDetails,
           Typography,
@@ -10,69 +9,31 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '80%',
-    margin: 'auto',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
-
-const CompTask = () => {
-  const classes = useStyles();
-
+const CompTask = (props) => {
   return (
-    <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel style={{width: "80%", margin: "auto"}} >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className={classes.heading}>ガンダムにクリエイティブメモを貰う</Typography>
+          id="panel2a-header">
+          <Typography color={"primary"}>
+            {props.title}
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+          <Typography color="textSecondary">
+            {props.content}
           </Typography>
-          <ExpansionPanelActions className={classes.root}>
+          <ExpansionPanelActions style={{width: "80%", margin: "auto"}}>
             <Button size="small" color="primary">
-              <KeyboardReturnIcon/>
+              <KeyboardReturnIcon onClick={props.clicked}/>
             </Button>
             <Button size="small" color="secondary">
-              <DeleteIcon/>
+              <DeleteIcon onClick={props.deleteClicked}/>
             </Button>
           </ExpansionPanelActions>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className={classes.heading}>傘を従業員3000人分コンビニで買う</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-          <ExpansionPanelActions className={classes.root}>
-            <Button size="small" color="primary">
-              <KeyboardReturnIcon/>
-            </Button>
-            <Button size="small" color="secondary">
-              <DeleteIcon/>
-            </Button>
-          </ExpansionPanelActions>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
   );
 }
 
