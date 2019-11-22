@@ -1,39 +1,41 @@
 import React, { Component } from 'react';
 import Task from './Task';
 import axios from 'axios';
+import CreateTask from './CreateTask';
 
 class TaskList extends Component {
   
   state = {
-    tasks: [],
+    tasks: []
   }
-  componentDidMount () {
+
+  componentDidMount = () => {
     axios.get('http://localhost:3001/tasks')
          .then(response => {
            this.setState({ tasks: response.data });
          });
   }
 
+  showNewData = () => {
+    axios.get('http://localhost:3001/tasks')
+    .then(response => {
+      this.setState({ tasks: response.data });
+    })
+  };
+
   CompletedTaskHandler = (id) => {
     axios.patch( 'http://localhost:3001/tasks/'+ id, {is_completed: true})
-    .then(response => {
-      // 新しいデータ情報をビューに反映
-      axios.get('http://localhost:3001/tasks')
-      .then(response => {
-        this.setState({ tasks: response.data });
-      });
-    });
+    .then( this.showNewData );
+  }
+
+  fetchNewData = () => {
+    this.showNewData()
+    console.log("成功")
   }
 
   DeleteTaskHandler = (id) => {
     axios.delete( 'http://localhost:3001/tasks/'+ id)
-    .then(response => {
-      // 新しいデータ情報をビューに反映
-      axios.get('http://localhost:3001/tasks')
-      .then(response => {
-        this.setState({ tasks: response.data });
-      });
-    });
+    .then( this.showNewData );
   }
 
   render(){
@@ -51,6 +53,7 @@ class TaskList extends Component {
     return (
       <div>
         {tasks}
+        <CreateTask fetchNewData={this.fetchNewData}/>
       </div>
     );
   }

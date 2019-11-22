@@ -22,7 +22,7 @@ class App extends Component {
             <Route path="/signup" component={SignUp} />
             <Route path="/createtask" component={CreateTask} />
           </Switch>
-          <CreateTask/>
+          {/* <CreateTask/> */}
         </div>
       </Router>
 
