@@ -38,7 +38,7 @@ class CompTaskList extends Component {
 
   render(){
     // タスク完了のみレンダーする
-    const tasks = this.state.tasks.map(task => {
+    const tasks = this.state.tasks.reverse().map(task => {
       return task.is_completed 
       ? <CompTask
           title={task.title}

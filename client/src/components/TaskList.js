@@ -40,7 +40,7 @@ class TaskList extends Component {
 
   render(){
     // タスク未完了のみレンダーする
-    const tasks = this.state.tasks.map(task => {
+    const tasks = this.state.tasks.reverse().map(task => {
       return task.is_completed 
       ? null
       : <Task 
