@@ -6,7 +6,8 @@ import {  ExpansionPanel,
           Checkbox,
           FormControlLabel,
           Typography,
-          Button  } from '@material-ui/core';
+          Button,
+          Divider  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,7 +15,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const Task = (props) => {
   
   return (
-    <ExpansionPanel style={{width: "80%", margin: "auto"}}>
+    <ExpansionPanel 
+      style={{width: "80%",
+              margin: "auto",
+              marginBottom: "0.5em"}}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         aria-label="Expand"
@@ -35,15 +39,16 @@ const Task = (props) => {
         <Typography color="textSecondary">
           {props.content}
         </Typography>
-        <ExpansionPanelActions　style={{width: "80%", margin: "auto"}}>
-          <Button size="small" color="primary">
-            <EditIcon/>
-          </Button>
-          <Button size="small" color="secondary">
-            <DeleteIcon onClick={props.deleteClicked}/>
-          </Button>
-        </ExpansionPanelActions>
       </ExpansionPanelDetails>
+      <Divider />
+      <ExpansionPanelActions>
+        <Button size="small" color="primary">
+          <EditIcon/>
+        </Button>
+        <Button size="small" color="secondary">
+          <DeleteIcon onClick={props.deleteClicked}/>
+        </Button>
+      </ExpansionPanelActions>
     </ExpansionPanel>
   );
 };
