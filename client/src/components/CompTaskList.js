@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CompTask from './CompTask';
 import axios from 'axios';
+import CreateTask from './CreateTask';
 
 class CompTaskList extends Component {
   
@@ -14,31 +15,27 @@ class CompTaskList extends Component {
          });
   }
 
+  showNewData = () => {
+    axios.get('http://localhost:3001/tasks')
+    .then(response => {
+      this.setState({ tasks: response.data });
+    })
+  };
+
   IncompletedTaskHandler = (id) => {
     axios.patch( 'http://localhost:3001/tasks/'+ id, {is_completed: false})
-    .then(response => {
-      // 新しいデータ情報をビューに反映
-      axios.get('http://localhost:3001/tasks')
-      .then(response => {
-        this.setState({ tasks: response.data });
-      });
-    });
+    .then( this.showNewData );
   }
 
   DeleteTaskHandler = (id) => {
     axios.delete( 'http://localhost:3001/tasks/'+ id)
-    .then(response => {
-      // 新しいデータ情報をビューに反映
-      axios.get('http://localhost:3001/tasks')
-      .then(response => {
-        this.setState({ tasks: response.data });
-      });
-    });
+    .then( this.showNewData );
   }
 
   render(){
     // タスク完了のみレンダーする
-    const tasks = this.state.tasks.reverse().map(task => {
+    const tasks = this.state.tasks.sort((a, b) => {   
+      return a.id > b.id ? -1 : 1 }).map(task => {
       return task.is_completed 
       ? <CompTask
           title={task.title}
@@ -51,6 +48,7 @@ class CompTaskList extends Component {
     return (
       <div>
         {tasks}
+        <CreateTask showNewData={this.showNewData}/>
       </div>
     );
   }

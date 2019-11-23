@@ -20,7 +20,6 @@ export default class CreateTask extends Component {
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value, });
-    console.log(this.state)
   }
 
   handleSubmit = () => {
@@ -33,7 +32,7 @@ export default class CreateTask extends Component {
 
     axios.post('http://localhost:3001/tasks', { task })
     .then(response => {
-      this.props.fetchNewData()
+      this.props.showNewData()
     });
   }
 
