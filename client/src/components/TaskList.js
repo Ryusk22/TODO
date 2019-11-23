@@ -23,37 +23,37 @@ class TaskList extends Component {
     })
   };
 
-  CompletedTaskHandler = (id) => {
+  completedTaskHandler = (id) => {
     axios.patch( 'http://localhost:3001/tasks/'+ id, {is_completed: true})
     .then( this.showNewData );
   }
 
-  fetchNewData = () => {
-    this.showNewData()
-    console.log("成功")
-  }
-
-  DeleteTaskHandler = (id) => {
+  deleteTaskHandler = (id) => {
     axios.delete( 'http://localhost:3001/tasks/'+ id)
     .then( this.showNewData );
   }
 
   render(){
     // タスク未完了のみレンダーする
-    const tasks = this.state.tasks.reverse().map(task => {
+    const tasks = this.state.tasks.sort((a, b) => {   
+      return a.id > b.id ? -1 : 1 }).map(task => {
       return task.is_completed 
       ? null
       : <Task 
           title={task.title}
           content={task.content}
           key={task.id}
-          completedClicked={ () => this.CompletedTaskHandler(task.id)}
-          deleteClicked={ () => this.DeleteTaskHandler(task.id)} />
+          id={task.id}
+          completedClicked={ () => this.completedTaskHandler(task.id)}
+          deleteClicked={ () => this.deleteTaskHandler(task.id)} 
+          // 新しいデータを表示するメソッドを渡す
+          showNewData={ this.showNewData }
+        />
     });
     return (
       <div>
         {tasks}
-        <CreateTask fetchNewData={this.fetchNewData}/>
+        <CreateTask showNewData={this.showNewData}/>
       </div>
     );
   }

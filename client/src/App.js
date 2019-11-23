@@ -7,6 +7,7 @@ import SignUp from './components/SignUp'
 import CompTaskList from './components/CompTaskList'
 import {  BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateTask from './components/CreateTask';
+import EditTask from './components/EditTask';
 
 class App extends Component {
   render() {
@@ -21,8 +22,8 @@ class App extends Component {
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/createtask" component={CreateTask} />
+            <Route path="/edittask" component={EditTask} />
           </Switch>
-          {/* <CreateTask/> */}
         </div>
       </Router>
 

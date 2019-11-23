@@ -9,8 +9,8 @@ import {  ExpansionPanel,
           Button,
           Divider  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditTask from './EditTask';
 
 const Task = (props) => {
   
@@ -31,7 +31,9 @@ const Task = (props) => {
         label={<Typography color="textSecondary">DONE</Typography>}
         labelPlacement="bottom"
       />
-        <Typography color="primary"  style={{width: "80%", margin: "auto"}}>
+        <Typography 
+          color="primary" 
+          style={{width: "80%", margin: "auto"}}>
           {props.title}
         </Typography>
       </ExpansionPanelSummary>
@@ -43,7 +45,16 @@ const Task = (props) => {
       <Divider />
       <ExpansionPanelActions>
         <Button size="small" color="primary">
-          <EditIcon/>
+      {/* タスクをを編集するコンポーネント */}
+        <EditTask 
+          title={props.title}
+          content={props.content}
+          id={props.id}
+          // TaskListコンポーネントで貰った新しいデータを表示するメソッドを渡す
+          showNewData={props.showNewData}
+        />
+
+      {/* ーーーーーーーーーーーーーーーー */}
         </Button>
         <Button size="small" color="secondary">
           <DeleteIcon onClick={props.deleteClicked}/>
