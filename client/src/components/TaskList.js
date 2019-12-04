@@ -13,10 +13,12 @@ class TaskList extends Component {
     axios.get('http://localhost:3001/tasks')
          .then(response => {
            this.setState({ tasks: response.data });
+           console.log("conponentDidMount")
          });
   }
 
   showNewData = () => {
+    console.log(this)
     axios.get('http://localhost:3001/tasks')
     .then(response => {
       this.setState({ tasks: response.data });
@@ -47,13 +49,13 @@ class TaskList extends Component {
           completedClicked={ () => this.completedTaskHandler(task.id)}
           deleteClicked={ () => this.deleteTaskHandler(task.id)} 
           // 新しいデータを表示するメソッドを渡す
-          showNewData={ this.showNewData }
+          showNewData={ this.showNewData.bind(this) }
         />
     });
     return (
       <div>
         {tasks}
-        <CreateTask showNewData={this.showNewData}/>
+        <CreateTask showNewData={this.showNewData.bind(this)}/>
       </div>
     );
   }

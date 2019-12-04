@@ -48,7 +48,7 @@ class CompTaskList extends Component {
     return (
       <div>
         {tasks}
-        <CreateTask showNewData={this.showNewData}/>
+        <CreateTask showNewData={this.showNewData.bind(this)}/>
       </div>
     );
   }

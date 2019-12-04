@@ -33,6 +33,7 @@ export default class CreateTask extends Component {
     axios.post('http://localhost:3001/tasks', { task })
     .then(response => {
       this.props.showNewData()
+      console.log(this)
     });
   }
 
