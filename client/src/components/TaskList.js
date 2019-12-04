@@ -10,7 +10,11 @@ class TaskList extends Component {
   }
 
   componentDidMount = () => {
-    axios.get('http://localhost:3001/tasks')
+    axios.get('http://localhost:3001/tasks',
+          { params: {
+                complete: false
+          }}
+          )
          .then(response => {
            this.setState({ tasks: response.data });
            console.log("conponentDidMount")
@@ -19,7 +23,11 @@ class TaskList extends Component {
 
   showNewData = () => {
     console.log(this)
-    axios.get('http://localhost:3001/tasks')
+    axios.get('http://localhost:3001/tasks',
+              { params: {
+                complete: false
+          }}
+          )
     .then(response => {
       this.setState({ tasks: response.data });
     })
@@ -37,8 +45,7 @@ class TaskList extends Component {
 
   render(){
     // タスク未完了のみレンダーする
-    const tasks = this.state.tasks.sort((a, b) => {   
-      return a.id > b.id ? -1 : 1 }).map(task => {
+    const tasks = this.state.tasks.map(task => {
       return task.is_completed 
       ? null
       : <Task 

@@ -9,14 +9,22 @@ class CompTaskList extends Component {
     tasks: []
   }
   componentDidMount () {
-    axios.get('http://localhost:3001/tasks')
+    axios.get('http://localhost:3001/tasks',
+          { params: {
+                complete: true
+          }}
+          )
          .then(response => {
            this.setState({ tasks: response.data });
          });
   }
 
   showNewData = () => {
-    axios.get('http://localhost:3001/tasks')
+    axios.get('http://localhost:3001/tasks',
+          { params: {
+                complete: true
+          }}
+          )
     .then(response => {
       this.setState({ tasks: response.data });
     })
@@ -34,9 +42,8 @@ class CompTaskList extends Component {
 
   render(){
     // タスク完了のみレンダーする
-    const tasks = this.state.tasks.sort((a, b) => {   
-      return a.id > b.id ? -1 : 1 }).map(task => {
-      return task.is_completed 
+    const tasks = this.state.tasks.map(task => {
+      return task.is_completed
       ? <CompTask
           title={task.title}
           content={task.content}

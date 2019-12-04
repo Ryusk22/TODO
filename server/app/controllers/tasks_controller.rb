@@ -1,8 +1,13 @@
 class TasksController < ApplicationController
   
   def index
-    tasks = Task.all
-    render json: tasks
+    if params[:complete] == "false"
+      tasks = Task.all.where(is_completed: false).order(id: "DESC")
+      render json: tasks
+    else
+      tasks = Task.all.where(is_completed: true).order(id: "DESC")
+      render json: tasks
+    end
   end
 
   def update
