@@ -1,97 +1,67 @@
 import React from 'react';
-import {  makeStyles,
-          ExpansionPanel,
+import {  ExpansionPanel,
           ExpansionPanelSummary,
           ExpansionPanelDetails,
           ExpansionPanelActions,
           Checkbox,
           FormControlLabel,
           Typography,
-          Button  } from '@material-ui/core';
+          Button,
+          Divider  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditTask from './EditTask';
 
-const useStyles = makeStyles({
-  root: {
-    width: '80%',
-    margin: 'auto',
-  },
-  formControlStyle: {
-    size: 10,
-  },
-});
-const Task = () => {
-  const classes = useStyles();
-
+const Task = (props) => {
+  
   return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-label="Expand"
-          aria-controls="additional-actions1-content"
-          id="additional-actions1-header"
-        >
-        <FormControlLabel
-          value="bottom"
-          control={<Checkbox color="primary" />}
-          label={<Typography color="textSecondary">DONE</Typography>}
-          labelPlacement="bottom"
+    <ExpansionPanel 
+      style={{width: "80%",
+              margin: "auto",
+              marginBottom: "0.5em"}}>
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-label="Expand"
+        aria-controls="additional-actions1-content"
+        id="additional-actions1-header"
+      >
+      <FormControlLabel
+        value="bottom"
+        control={<Checkbox onClick={props.completedClicked} color="primary" />}
+        label={<Typography color="textSecondary">DONE</Typography>}
+        labelPlacement="bottom"
+      />
+        <Typography 
+          color="primary" 
+          style={{width: "80%", margin: "auto"}}>
+          {props.title}
+        </Typography>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>
+        <Typography color="textSecondary">
+          {props.content}
+        </Typography>
+      </ExpansionPanelDetails>
+      <Divider />
+      <ExpansionPanelActions>
+        <Button size="small" color="primary">
+      {/* タスクをを編集するコンポーネント */}
+        <EditTask 
+          title={props.title}
+          content={props.content}
+          id={props.id}
+          // TaskListコンポーネントで貰った新しいデータを表示するメソッドを渡す
+          showNewData={props.showNewData}
         />
-          <Typography color="primary"  className={classes.root}>
-            コンビニでナゲットとポテトとハンバーガーを買う
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography color="textSecondary">
-            The click event of the nested action will propagate up and expand the panel unless you
-            explicitly stop it.
-          </Typography>
-          <ExpansionPanelActions　className={classes.root}>
-            <Button size="small" color="primary">
-              <EditIcon/>
-            </Button>
-            <Button size="small" color="secondary">
-              <DeleteIcon/>
-            </Button>
-          </ExpansionPanelActions>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-label="Expand"
-          aria-controls="additional-actions1-content"
-          id="additional-actions1-header"
-        >
-        <FormControlLabel
-          value="bottom"
-          control={<Checkbox color="primary" />}
-          label={<Typography color="textSecondary">DONE</Typography>}
-          labelPlacement="bottom"
-        />
-          <Typography color="primary"  className={classes.root}>
-            先生に明日遊べるかどうかを聞いて、交渉する
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography color="textSecondary">
-            The click event of the nested action will propagate up and expand the panel unless you
-            explicitly stop it.
-          </Typography>
-          <ExpansionPanelActions　className={classes.root}>
-            <Button size="small" color="primary">
-              <EditIcon/>
-            </Button>
-            <Button size="small" color="secondary">
-              <DeleteIcon/>
-            </Button>
-          </ExpansionPanelActions>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
+
+      {/* ーーーーーーーーーーーーーーーー */}
+        </Button>
+        <Button size="small" color="secondary">
+          <DeleteIcon onClick={props.deleteClicked}/>
+        </Button>
+      </ExpansionPanelActions>
+    </ExpansionPanel>
   );
-}
+};
 
 export default Task;

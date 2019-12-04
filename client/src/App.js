@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import HeaderMiddle from './components/HeaderMiddle'
 import Header from './components/Header'
-import Task from './components/Task'
+import TaskList from './components/TaskList'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
-import CompTask from './components/CompTask'
+import CompTaskList from './components/CompTaskList'
 import {  BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateTask from './components/CreateTask';
+import EditTask from './components/EditTask';
 
 class App extends Component {
   render() {
@@ -16,13 +17,13 @@ class App extends Component {
           <Header />
           <HeaderMiddle />
           <Switch>
-            <Route path="/task" component={Task} />
-            <Route path="/comptask" component={CompTask} />
+            <Route path="/task" component={TaskList} />
+            <Route path="/comptask" component={CompTaskList} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/createtask" component={CreateTask} />
+            <Route path="/edittask" component={EditTask} />
           </Switch>
-          <CreateTask/>
         </div>
       </Router>
 

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import {  Fab,
-          Button,
+import {  Button,
           TextField,
           Dialog,
           DialogActions,
           DialogContent,
           DialogTitle } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios';
 
 
-export default class CreateTask extends Component {
+export default class EditTask extends Component {
 
   state = {
     open: false,
@@ -22,38 +21,28 @@ export default class CreateTask extends Component {
     this.setState({ [e.target.name]: e.target.value, });
   }
 
-  handleSubmit = () => {
+  EditedTaskHandler = (id) => {
     this.handleToggle()
-
-    const task = {
-      title: this.state.title,
-      content: this.state.content,
-    }
-
-    axios.post('http://localhost:3001/tasks', { task })
-    .then(response => {
-      this.props.showNewData()
-      console.log(this)
-    });
+    axios.patch( 'http://localhost:3001/tasks/'+ id, {title: this.state.title, content: this.state.content})
+    .then( this.props.showNewData );
   }
 
   // モーダルの開閉操作
   handleToggle = () => {
-    this.setState({ open: !this.state.open });
+    this.setState({ open: !this.state.open, 
+                    title: this.props.title,
+                    content: this.props.content});
   }
 
   render() {
 
     return (
       <div>
-        <Fab
-        style={{position:"fixed", right:"10%", bottom:50, zIndex:1}}
-        color="primary"
-        onClick={this.handleToggle}>
-          <AddIcon />
-        </Fab>
+        <EditIcon 
+          onClick={this.handleToggle}
+        />
         <Dialog open={this.state.open} onClose={this.handleToggle}>
-          <DialogTitle id="form-dialog-title">TODOを入力</DialogTitle>
+          <DialogTitle id="form-dialog-title">TODOを編集</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -63,6 +52,7 @@ export default class CreateTask extends Component {
               label="タイトル"
               type="text"
               onChange={this.handleChange}
+              defaultValue={this.props.title}
               fullWidth
             />
             <TextField
@@ -72,16 +62,17 @@ export default class CreateTask extends Component {
               label="詳細"
               type="text"
               onChange={this.handleChange}
+              defaultValue={this.props.content}
               multiline={true}
               fullWidth
             />
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={ this.handleSubmit  }
+              onClick={ () => this.EditedTaskHandler(this.props.id) }
               color="primary"
               type="submit">
-              作成
+              完了
             </Button>
           </DialogActions>
         </Dialog>

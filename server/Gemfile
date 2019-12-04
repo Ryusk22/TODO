@@ -47,4 +47,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'pry-byebug'
 gem 'rb-readline'
+gem 'faker'
+gem 'annotate'
+gem 'rack-cors'
 gem 'annotate'
